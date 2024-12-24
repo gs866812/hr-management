@@ -1,9 +1,11 @@
-import Image from "next/image";
+import Dashboard from "@/Components/Front-end/Dashboard";
+
+
 
 export default function Home() {
   return (
     <div>
-      <h2>Next</h2>
+      <Dashboard/>
     </div>
   );
 }

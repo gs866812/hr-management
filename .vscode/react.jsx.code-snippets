@@ -1,0 +1,83 @@
+{
+  "1": {
+    "prefix": "getapi",
+    "body": [
+      "export const dynamic = 'force-dynamic';",
+      "import clientPromise from \"@/lib/mongodb\";",
+      "",
+      "export async function GET() {",
+      "  try {",
+      "    const client = await clientPromise;",
+      "    const db = client.db(\"hrManagement\");",
+      "    const donation = db.collection(\"\");",
+      "",
+      "    const result = await donation.find().toArray();",
+      "",
+      "    // Return success response",
+      "    return new Response(JSON.stringify(result), {",
+      "      status: 200,",
+      "      headers: {",
+      "        \"Content-Type\": \"application/json\",",
+      "      },",
+      "    });",
+      "  } catch (error) {",
+      "    // Return error response",
+      "    return new Response(JSON.stringify({ success: false, error: error.message }), {",
+      "      status: 500,",
+      "      headers: {",
+      "        \"Content-Type\": \"application/json\",",
+      "      },",
+      "    });",
+      "  }",
+      "}",
+      ""
+    ],
+    "description": "get-api response"
+  },
+  "2": {
+    "prefix": "fetcdata",
+    "body": [
+      "const fetchUsers = async () => {",
+      "      const res = await fetch('/api/users');",
+      "      const data = await res.json();",
+      "      setUsers(data);",
+      "    };",
+      "    ",
+      "    fetchUsers();"
+    ],
+    "description": "fetch-api"
+  },
+  "3": {
+    "prefix": "postapi",
+    "body": [
+      "import clientPromise from \"@/lib/mongodb\";",
+      "",
+      "export async function POST(req) {",
+      "  try {",
+      "    const body = await req.json();",
+      "    const client = await clientPromise;",
+      "    const db = client.db(\"hrManagement\");",
+      "    const adminUsersList = db.collection(\"adminUsers\");",
+      "",
+      "    const result = await adminUsersList.insertOne(body);",
+      "",
+      "    return new Response(JSON.stringify({ success: true, result }), {",
+      "      status: 200,",
+      "      headers: {",
+      "        \"Content-Type\": \"application/json\",",
+      "      },",
+      "    });",
+      "  } catch (error) {",
+      "    return new Response(JSON.stringify({ success: false, error: error.message }), {",
+      "      status: 500,",
+      "      headers: {",
+      "        \"Content-Type\": \"application/json\",",
+      "      },",
+      "    });",
+      "  }",
+      "}",
+      ""
+    ],
+    "description": "post-api request"
+  }
+}

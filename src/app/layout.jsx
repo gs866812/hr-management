@@ -1,6 +1,8 @@
-import Header from "@/Components/Header/Header";
-import "./globals.css";
+import ReduxProvider from "@/redux/ReduxProvider";
 
+import "./globals.css";
+import AuthenticatedLayout from "./layouts/AuthenticatedLayout";
+import UnauthenticatedLayout from "./layouts/UnauthenticatedLayout";
 
 export const metadata = {
   title: "Webbriks || HRM",
@@ -8,20 +10,18 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
-  return (
-    <html lang="en" data-theme='light'>
-      <body>
-        <div>
-          <header>
-            <Header/>
-          </header>
-          <main>
-            {children}
-          </main>
-          <footer>
+  const isAuthenticated = false; // Replace with real authentication logic.
 
-          </footer>
-        </div>
+  return (
+    <html lang="en" data-theme="light">
+      <body>
+        <ReduxProvider>
+          {isAuthenticated ? (
+            <AuthenticatedLayout>{children}</AuthenticatedLayout>
+          ) : (
+            <UnauthenticatedLayout>{children}</UnauthenticatedLayout>
+          )}
+        </ReduxProvider>
       </body>
     </html>
   );

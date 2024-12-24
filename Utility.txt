@@ -1,0 +1,37 @@
+To refetch:
+"use client";
+
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleReFetch } from "@/redux/slices/reFetchSlice";
+
+export default function ExampleComponent() {
+--------------------------------------------------------------------------------------------
+  const dispatch = useDispatch();
+  const reFetch = useSelector((state) => state.reFetch.reFetch); // Access the state
+  
+--------------------------------------------------------------------------------------------
+
+  // Simulate fetching data when reFetch changes
+  useEffect(() => {
+    console.log("Fetching data...");
+    // Your fetch logic here
+  }, [reFetch]);
+
+--------------------------------------------------------------------------------------------
+  const handleDelete = () => {
+    // Perform your delete logic here
+    console.log("Item deleted!");
+
+    // Trigger a refetch
+    dispatch(toggleReFetch());
+  };
+
+--------------------------------------------------------------------------------------------
+  return (
+    <div>
+      <h1>Example Component</h1>
+      <button onClick={handleDelete}>Delete Item</button>
+    </div>
+  );
+}
